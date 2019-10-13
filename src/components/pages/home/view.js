@@ -6,36 +6,19 @@ import _ from 'lodash'
 import {PokemonCard} from '../../molecules'
 
 
+
 class Home extends Component {
 
-    state = {
-        pokemonList: [],
-    }
-
     componentDidMount() {
-        this._loadPokemonList()
+        //this._loadPokemonList()
+        this.props.fetchPokemonsList()
     }
-
-    _loadPokemonList = async () => {
-        try{
-            const getPokemonsRes = await api.getPokemons();
-            const pokemonList = _.get(getPokemonsRes,'data.results')
-            this.setState({pokemonList})
-            
-            
-            
-        } catch(e) {
-            console.log('getPokemonsErr: ', e);
-        } finally {
-            
-        }
-    }
-
 
     _renderItem = ({item,index}) => <PokemonCard pokemon={item} index={index} onPress={pokemon => console.log('pokemon', pokemon)}/>
 
     render() {
-        const {pokemonList} = this.state
+        const {pokemonList} = this.props
+        console.log('this.props', this.props)
         return (
           <SafeAreaView style={styles.container}>
            <FlatList
@@ -50,5 +33,5 @@ class Home extends Component {
         );
     }
 }
+export default Home;
 
-export default Home
