@@ -8,9 +8,11 @@ import { Actions } from 'react-native-router-flux';
 
 class Home extends Component {
 
-    componentDidMount() {
-        this.props.fetchPokemonsList()
-    }
+  constructor(props) {
+    super(props)
+    this.props.initPokemonList()
+  }
+    
     _onPokemonTapped = pokemon => {
         this.props.updateItem(pokemon)
         var name = _.get(pokemon,'name')
@@ -18,15 +20,19 @@ class Home extends Component {
         Actions.Pokemon({title: name})
     }
 
-    _renderItem = ({item,index}) => <PokemonCard pokemon={item} index={index} onPress={pokemon => this._onPokemonTapped(pokemon)}/>
+    _renderItem = ({item,index,name}) => <PokemonCard pokemon={item} index={index} name={name} onPress={pokemon => this._onPokemonTapped(pokemon)}/>
 
     _onEndReached = ({distanceFromEnd}) => {
-
+      const {isFetching, pokemonList, total} = this.props
+      const onEndReached = distanceFromEnd > 100 && !isFetching && pokemonList.length < total
+      if (onEndReached) {
+        this.props.updatePokemonListOffset();
+      }
     }
 
     render() {
         const {pokemonList, isFetching} = this.props
-        console.log(this.props)
+        const name = _.get(pokemonList,'name')
         return (
           <SafeAreaView style={styles.container}>
             <FlatList
@@ -36,10 +42,11 @@ class Home extends Component {
             keyExtractor={(item,index)=> `pokemon-${index}`}
             numColumns={2}
             onEndReached= {this._onEndReached}
+            onEndReachedThreshold={0.8}
             refreshControl={
             <RefreshControl 
             refreshing={isFetching} 
-            onRefresh={this.props.fetchPokemonsList}
+            onRefresh={this.props.initPokemonList}
             tintColor={'white'}
             colors={['white']}
             />}

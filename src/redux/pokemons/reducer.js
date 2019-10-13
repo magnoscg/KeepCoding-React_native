@@ -14,7 +14,8 @@ const reducer = (state = initialState, action = {}) => {
         case types.POKEMONS_UPDATE_LIST:
             return {
                 ...state,
-                list: action.value,
+                list: action.list,
+                total: action.total,
             }
         case types.POKEMONS_UPDATE_ITEM:
             return {
