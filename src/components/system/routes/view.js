@@ -6,7 +6,7 @@ const Routes = () => (
 
        <Router>
            <Stack key="root">
-            <Scene key="Home" component={Home}></Scene>
+            <Scene key="Home" component={Home} title= "Pokedex"></Scene>
             <Scene key="Pokemon" component={Pokemon}></Scene>
            </Stack>
        </Router>
