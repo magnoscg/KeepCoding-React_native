@@ -1,34 +1,50 @@
 import React, {Component} from 'react';
 import styles from './styles'
-import {SafeAreaView, View, Text, TouchableOpacity,Image, FlatList} from 'react-native'
-import * as api from '../../../api'
+import {SafeAreaView, FlatList, RefreshControl} from 'react-native'
 import _ from 'lodash'
 import {PokemonCard} from '../../molecules'
-
+import { Actions } from 'react-native-router-flux';
 
 
 class Home extends Component {
 
     componentDidMount() {
-        //this._loadPokemonList()
         this.props.fetchPokemonsList()
     }
+    _onPokemonTapped = pokemon => {
+        this.props.updateItem(pokemon)
+        var name = _.get(pokemon,'name')
+        name = name.toUpperCase()
+        Actions.Pokemon({title: name})
+    }
 
-    _renderItem = ({item,index}) => <PokemonCard pokemon={item} index={index} onPress={pokemon => console.log('pokemon', pokemon)}/>
+    _renderItem = ({item,index}) => <PokemonCard pokemon={item} index={index} onPress={pokemon => this._onPokemonTapped(pokemon)}/>
+
+    _onEndReached = ({distanceFromEnd}) => {
+
+    }
 
     render() {
-        const {pokemonList} = this.props
-        console.log('this.props', this.props)
+        const {pokemonList, isFetching} = this.props
+        console.log(this.props)
         return (
           <SafeAreaView style={styles.container}>
-           <FlatList
-           style= {styles.list}
-           data={pokemonList}
-           renderItem={this._renderItem}
-           keyExtractor={(item,index)=> `pokemon-${index}`}
-           numColumns={2}
-           >
-           </FlatList>
+            <FlatList
+            style= {styles.list}
+            data={pokemonList}
+            renderItem={this._renderItem}
+            keyExtractor={(item,index)=> `pokemon-${index}`}
+            numColumns={2}
+            onEndReached= {this._onEndReached}
+            refreshControl={
+            <RefreshControl 
+            refreshing={isFetching} 
+            onRefresh={this.props.fetchPokemonsList}
+            tintColor={'white'}
+            colors={['white']}
+            />}
+            >
+            </FlatList>
           </SafeAreaView>
         );
     }

@@ -2,6 +2,8 @@ import * as types from './types'
 
 const initialState = {
     list: [],
+    total: 0,
+    offset: 0,
     item: null,
     isFetching: false
 }
@@ -23,6 +25,12 @@ const reducer = (state = initialState, action = {}) => {
             return {
                 ...state,
                 isFetching: action.value
+            }
+        case types.POKEMONS_UPDATE_OFFSET:
+            return {
+                ...state,
+                offset: action.value,
+                
             }
         
         default: return state

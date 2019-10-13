@@ -11,6 +11,7 @@ export const getPokemons = () => {
     return instance.get(url)
 }
 
-export const getPokemonData = (url) => {
+export const getPokemonData = pokemonName => {
+    const url = `/pokemon/`+ pokemonName
     return instance.get(url)
 }

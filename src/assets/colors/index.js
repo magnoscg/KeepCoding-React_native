@@ -1,5 +1,5 @@
 const main = '#272727';
-const navBar = '#171717';
+const navBar = '#d50000';
 const white = 'white';
 const black = 'black';
 const error = 'red';

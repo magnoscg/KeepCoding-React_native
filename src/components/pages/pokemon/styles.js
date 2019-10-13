@@ -4,8 +4,11 @@ import {StyleSheet} from 'react-native'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E2E2E2',
-        justifyContent: "center",
+        backgroundColor: '#ff5252',
         alignItems: 'center',
+    },
+    text: {
+        fontSize: 16,
+        color: 'white'
     }
 })

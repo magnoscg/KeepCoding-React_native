@@ -1,2 +1,3 @@
 import pokemons from './pokemons'
-export {pokemons}
+import pokemon from './pokemon'
+export {pokemons, pokemon}
