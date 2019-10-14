@@ -8,4 +8,6 @@ export const navBarStyles = {
   titleStyle: {color: colors.white},
   backButtonTextStyle: {color: colors.white},
   backButtonTintColor: colors.white,
+  rightButtonTextStyle: {color: colors.white},
+  rightButtonTintColor: colors.white,
 };

@@ -18,3 +18,5 @@ export const getPokemonData = pokemonName => {
     const url = `/pokemon/`+ pokemonName
     return instance.get(url)
 }
+
+//FAKE POSTPOKEMON

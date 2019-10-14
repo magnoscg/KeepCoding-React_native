@@ -67,25 +67,23 @@ export const fetchPokemonsList = () => {
     }
 }
 
+
 export const postPokemon = data => {
     return (dispatch, getState) => {
-      try {
-
-        dispatch(setFetching(true));
-        const pokemonData = data;
-  
-        const {list, total} = getState().pokemons;
-  
-        const newList = [...list, pokemonData];
-        const newTotal = total + 1;
-        dispatch(updateList(newList, newTotal));
-        if (pokemonData) {
-          Actions.pop();
+        console.log(data)
+        
+        try {
+            dispatch(setFetching(true))
+            const postPokemonRes = data
+            const {total, list} = getState().pokemons
+            console.log(list)
+            const newTotal = total + 1
+            const newList = [postPokemonRes, ...list]
+            dispatch(updateList(newList,newTotal))
+        } catch (err) {
+            console.log('postPokemon error: ', e.message)
+        } finally {
+            dispatch(setFetching(false))
         }
-      } catch (err) {
-        console.log('postPokemon err: ', err.message);
-      } finally {
-        dispatch(setFetching(false));
-      }
-    };
-  };
+    }
+}
