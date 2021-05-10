@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "npm-check-updates": "^3.1.24",
     "proptypes": "^1.1.0",
     "qs": "^6.9.0",
