@@ -14,7 +14,7 @@
     "lodash": "^4.17.15",
     "npm-check-updates": "^3.1.24",
     "proptypes": "^1.1.0",
-    "qs": "^6.9.0",
+    "qs": "^6.9.7",
     "react": "16.9.0",
     "react-native": "0.61.2",
     "react-native-image-picker": "^1.1.0",
